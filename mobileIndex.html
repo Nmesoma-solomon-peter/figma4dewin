@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Rate4DiWin - Mobile Home</title>
+  <style>
+    :root {
+      --primary: #059C05;
+      --secondary: #FF6600;
+      --accent: #FFFFFF;
+      --text-dark: #222;
+      --text-light: #fff;
+      --shadow: 0 2px 8px rgba(0,0,0,0.07);
+    }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: var(--accent);
+      color: var(--text-dark);
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      width: 96%;
+      max-width: 100%;
+      margin: 0 auto;
+    }
+    header {
+      background: var(--primary);
+      color: var(--text-light);
+      padding: 1rem 0.5rem;
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .nav {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+    .logo {
+      font-size: 1.3rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      padding: 0;
+      margin: 0;
+      width: 100%;
+    }
+    nav a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.1rem;
+      padding: 0.7rem 0.5rem;
+      border-radius: 8px;
+      display: block;
+      width: 100%;
+      transition: background 0.2s;
+    }
+    nav a:hover {
+      background: var(--secondary);
+      color: var(--accent);
+    }
+    .hero {
+      text-align: center;
+      padding: 2rem 0 1.5rem 0;
+      background: linear-gradient(90deg, var(--primary) 60%, var(--secondary) 100%);
+      color: var(--accent);
+    }
+    .hero h1 {
+      font-size: 1.3rem;
+      margin-bottom: 0.7rem;
+      font-weight: 700;
+    }
+    .hero p {
+      font-size: 1rem;
+      margin-bottom: 1.2rem;
+    }
+    .hero-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      align-items: center;
+    }
+    .btn {
+      padding: 0.8rem 1.2rem;
+      border: none;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      width: 90%;
+      max-width: 250px;
+      margin: 0 auto;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-primary {
+      background: var(--secondary);
+      color: var(--accent);
+    }
+    .btn-primary:hover {
+      background: var(--accent);
+      color: var(--secondary);
+      border: 2px solid var(--secondary);
+    }
+    .btn-secondary {
+      background: var(--accent);
+      color: var(--primary);
+      border: 2px solid var(--primary);
+    }
+    .btn-secondary:hover {
+      background: var(--primary);
+      color: var(--accent);
+    }
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin: 2rem 0 1rem 0;
+      color: var(--primary);
+      text-align: center;
+    }
+    .restaurants {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      margin-bottom: 1.5rem;
+    }
+    .restaurant-card {
+      background: var(--accent);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .restaurant-img {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 0.7rem;
+      border: 2px solid var(--secondary);
+    }
+    .restaurant-name {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+      color: var(--primary);
+    }
+    .restaurant-rating {
+      color: var(--secondary);
+      font-size: 0.98rem;
+      margin-bottom: 0.3rem;
+    }
+    .restaurant-desc {
+      font-size: 0.95rem;
+      color: #444;
+      margin-bottom: 0.7rem;
+      text-align: center;
+    }
+    .see-details {
+      background: var(--primary);
+      color: var(--accent);
+      border: none;
+      border-radius: 20px;
+      padding: 0.4rem 1rem;
+      font-size: 0.95rem;
+      cursor: pointer;
+      width: 100%;
+      transition: background 0.2s;
+    }
+    .see-details:hover {
+      background: var(--secondary);
+    }
+    .how-it-works {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin: 2rem 0 1.5rem 0;
+      align-items: center;
+    }
+    .step {
+      background: var(--primary);
+      color: var(--accent);
+      border-radius: 10px;
+      padding: 1.2rem 1rem;
+      width: 100%;
+      box-shadow: var(--shadow);
+      text-align: center;
+      max-width: 320px;
+    }
+    .step-number {
+      background: var(--secondary);
+      color: var(--accent);
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      font-weight: bold;
+      margin: 0 auto 0.7rem auto;
+    }
+    .step-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+    .review-teaser {
+      background: var(--secondary);
+      color: var(--accent);
+      border-radius: 12px;
+      padding: 1.5rem 0.7rem;
+      text-align: center;
+      margin: 2rem 0 1.5rem 0;
+      box-shadow: var(--shadow);
+    }
+    .review-teaser h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.7rem;
+      font-weight: 700;
+    }
+    .review-teaser p {
+      font-size: 0.98rem;
+      margin-bottom: 1rem;
+    }
+    .review-teaser .btn {
+      background: var(--primary);
+      color: var(--accent);
+      border: none;
+      width: 90%;
+      max-width: 220px;
+    }
+    .review-teaser .btn:hover {
+      background: var(--accent);
+      color: var(--primary);
+      border: 2px solid var(--primary);
+    }
+    .testimonials {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+      margin: 1.5rem 0 1rem 0;
+    }
+    .testimonial-card {
+      background: var(--accent);
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+      padding: 1.2rem 0.7rem 1rem 0.7rem;
+      max-width: 320px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border-top: 3px solid var(--secondary);
+    }
+    .testimonial-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 0.7rem;
+      border: 1.5px solid var(--primary);
+    }
+    .testimonial-quote {
+      font-style: italic;
+      color: #444;
+      margin-bottom: 0.7rem;
+      font-size: 0.98rem;
+    }
+    .testimonial-name {
+      font-weight: 600;
+      color: var(--primary);
+      font-size: 0.95rem;
+    }
+    footer {
+      background: var(--primary);
+      color: var(--accent);
+      text-align: center;
+      padding: 1rem 0;
+      margin-top: 1.5rem;
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="logo">Rate4DiWin</div>
+      <nav>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#recommended">Browse Restaurants</a></li>
+          <li><a href="#feedback">Give Feedback</a></li>
+          <li><a href="#rewards">See My Rewards</a></li>
+          <li><a href="#login">Login/Signup</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1>Find & Rate the Best Restaurants in Kigali!</h1>
+    <p>Discover top spots or share your experience for rewards. Your voice helps others eat better!</p>
+    <div class="hero-buttons">
+      <button class="btn btn-primary">See Recommendations</button>
+      <button class="btn btn-secondary">Rate a Restaurant</button>
+    </div>
+  </section>
+
+  <section id="recommended">
+    <div class="container">
+      <div class="section-title">Our Top Picks in Kigali</div>
+      <div class="restaurants">
+        <div class="restaurant-card">
+          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=facearea&w=256&q=80" alt="Heaven Restaurant" class="restaurant-img">
+          <div class="restaurant-name">Heaven Restaurant</div>
+          <div class="restaurant-rating">★★★★☆ (4.5)</div>
+          <div class="restaurant-desc">A fusion of local and international cuisine with a stunning city view.</div>
+          <button class="see-details">See Details</button>
+        </div>
+        <div class="restaurant-card">
+          <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=facearea&w=256&q=80" alt="Khana Khazana" class="restaurant-img">
+          <div class="restaurant-name">Khana Khazana</div>
+          <div class="restaurant-rating">★★★★★ (5.0)</div>
+          <div class="restaurant-desc">The best of Indian cuisine in Kigali, with a cozy atmosphere.</div>
+          <button class="see-details">See Details</button>
+        </div>
+        <div class="restaurant-card">
+          <img src="https://images.unsplash.com/photo-1526178613658-3f1622045557?auto=format&fit=facearea&w=256&q=80" alt="Meze Fresh" class="restaurant-img">
+          <div class="restaurant-name">Meze Fresh</div>
+          <div class="restaurant-rating">★★★★☆ (4.2)</div>
+          <div class="restaurant-desc">Delicious burritos and bowls, perfect for a quick, healthy meal.</div>
+          <button class="see-details">See Details</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-title">How It Works</div>
+      <div class="how-it-works">
+        <div class="step">
+          <div class="step-number">1</div>
+          <div class="step-title">Browse</div>
+          <div>View top-rated restaurants in Kigali and find your next meal spot.</div>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <div class="step-title">Rate</div>
+          <div>Log in, prove your visit, and rate your experience in a fun, quiz-style format.</div>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <div class="step-title">Win</div>
+          <div>Earn points and rewards for every review you submit!</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="review-teaser">
+        <h3>Make Your Review Count!</h3>
+        <p>Answer fun questions, earn points, and help others choose the best places to eat in Kigali. Ready to share your experience?</p>
+        <button class="btn">Start Rating</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonial Section -->
+  <section>
+    <div class="container">
+      <div class="section-title" style="color: var(--secondary);">What Our Users Say</div>
+      <div class="testimonials">
+        <div class="testimonial-card">
+          <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Client 1" class="testimonial-avatar">
+          <div class="testimonial-quote">“I found the perfect spot for my anniversary dinner thanks to Rate4DiWin! The reviews were spot on.”</div>
+          <div class="testimonial-name">— Aline M.</div>
+        </div>
+        <div class="testimonial-card">
+          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Client 2" class="testimonial-avatar">
+          <div class="testimonial-quote">“I love how easy it is to see top restaurants and share my own experiences. Highly recommended!”</div>
+          <div class="testimonial-name">— Eric N.</div>
+        </div>
+        <div class="testimonial-card">
+          <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="Client 3" class="testimonial-avatar">
+          <div class="testimonial-quote">“The quiz-style review was fun and engaging. Plus, I earned points for my honest feedback!”</div>
+          <div class="testimonial-name">— Jean P.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      &copy; 2024 Rate4DiWin. Made with <span style="color: var(--secondary);">&#10084;</span> in Kigali.
+    </div>
+  </footer>
+</body>
+</html> 

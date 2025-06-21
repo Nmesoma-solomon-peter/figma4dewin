@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Rewards - Rate4DiWin</title>
+  <style>
+    :root {
+      --primary: #059C05;
+      --secondary: #FF6600;
+      --accent: #FFFFFF;
+      --text-dark: #222;
+      --text-light: #fff;
+      --shadow: 0 2px 8px rgba(0,0,0,0.07);
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: var(--accent);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+    header {
+      background: var(--primary);
+      color: var(--text-light);
+      padding: 1.5rem 0;
+      box-shadow: var(--shadow);
+    }
+    .container {
+      width: 90%;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 2rem;
+      font-weight: bold;
+      letter-spacing: 2px;
+      color: var(--accent);
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+    nav a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    nav a:hover {
+      color: var(--secondary);
+    }
+    /* Rewards Summary */
+    .rewards-header {
+      text-align: center;
+      margin: 3rem 0 2rem 0;
+    }
+    .rewards-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+    .rewards-total {
+      font-size: 1.2rem;
+      color: var(--secondary);
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+    /* Earned Rewards List */
+    .earned-rewards {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      margin-bottom: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .reward-card {
+      background: var(--primary);
+      color: var(--accent);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      padding: 1.2rem 1.5rem;
+      min-width: 140px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 1.05rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .reward-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    /* Spin & Win Section */
+    .spin-section {
+      background: var(--accent);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 2.5rem 1.5rem 2rem 1.5rem;
+      margin-bottom: 2.5rem;
+      text-align: center;
+    }
+    .spin-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--secondary);
+      margin-bottom: 0.7rem;
+    }
+    .spin-instructions {
+      color: #444;
+      margin-bottom: 2rem;
+      font-size: 1.05rem;
+    }
+    .spin-wheel-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+    .spin-wheel {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: conic-gradient(
+        var(--primary) 0deg 60deg,
+        var(--secondary) 60deg 120deg,
+        var(--primary) 120deg 180deg,
+        var(--secondary) 180deg 240deg,
+        var(--primary) 240deg 300deg,
+        var(--secondary) 300deg 360deg
+      );
+      border: 6px solid var(--primary);
+      box-shadow: var(--shadow);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .spin-pointer {
+      width: 0;
+      height: 0;
+      border-left: 18px solid transparent;
+      border-right: 18px solid transparent;
+      border-bottom: 28px solid var(--secondary);
+      position: absolute;
+      top: -34px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+    }
+    .spin-labels {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+    .spin-label {
+      position: absolute;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-shadow: 0 1px 4px rgba(0,0,0,0.12);
+    }
+    .spin-label-1 { top: 18px; left: 50%; transform: translateX(-50%); }
+    .spin-label-2 { top: 55px; right: 18px; }
+    .spin-label-3 { bottom: 55px; right: 18px; }
+    .spin-label-4 { bottom: 18px; left: 50%; transform: translateX(-50%); }
+    .spin-label-5 { bottom: 55px; left: 18px; }
+    .spin-label-6 { top: 55px; left: 18px; }
+    .spin-btn {
+      margin-top: 2rem;
+      padding: 1rem 2.5rem;
+      border: none;
+      border-radius: 30px;
+      background: var(--secondary);
+      color: var(--accent);
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .spin-btn:hover {
+      background: var(--primary);
+      color: var(--accent);
+    }
+    .spin-prize {
+      margin-top: 2rem;
+      font-size: 1.15rem;
+      color: var(--primary);
+      font-weight: 600;
+      min-height: 1.5em;
+    }
+    /* Footer */
+    footer {
+      background: var(--primary);
+      color: var(--accent);
+      text-align: center;
+      padding: 1.2rem 0;
+      margin-top: 2rem;
+      font-size: 0.98rem;
+    }
+    @media (max-width: 900px) {
+      .container {
+        width: 98%;
+        max-width: 100%;
+      }
+      .nav {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .earned-rewards {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+      }
+      .spin-wheel {
+        width: 120px;
+        height: 120px;
+      }
+    }
+    @media (max-width: 700px) {
+      .container {
+        width: 99%;
+        max-width: 100%;
+      }
+      .nav {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .rewards-header {
+        margin: 2rem 0 1.2rem 0;
+      }
+      .rewards-title {
+        font-size: 1.3rem;
+      }
+      .logo {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="logo">Rate4DiWin</div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="browse.html">Browse Restaurants</a></li>
+          <li><a href="feedback.html">Give Feedback</a></li>
+          <li><a href="rewards.html" style="color: var(--secondary); font-weight: bold;">See My Rewards</a></li>
+          <li><a href="#login">Login/Signup</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="rewards-header">
+    <div class="rewards-title">My Rewards</div>
+    <div class="rewards-total">You have 3 rewards!</div>
+  </div>
+
+  <div class="container">
+    <div class="earned-rewards">
+      <div class="reward-card">
+        <span class="reward-icon">🎁</span>
+        Free Dessert
+      </div>
+      <div class="reward-card">
+        <span class="reward-icon">🍽️</span>
+        10% Off Next Meal
+      </div>
+      <div class="reward-card">
+        <span class="reward-icon">☕</span>
+        Free Coffee
+      </div>
+    </div>
+
+    <div class="spin-section">
+      <div class="spin-title">Spin & Win!</div>
+      <div class="spin-instructions">Spin the wheel for a chance to win more rewards!</div>
+      <div class="spin-wheel-container">
+        <div class="spin-pointer"></div>
+        <div class="spin-wheel">
+          <div class="spin-labels">
+            <span class="spin-label spin-label-1">Free Meal</span>
+            <span class="spin-label spin-label-2">10% Off</span>
+            <span class="spin-label spin-label-3">Free Drink</span>
+            <span class="spin-label spin-label-4">Try Again</span>
+            <span class="spin-label spin-label-5">Free Dessert</span>
+            <span class="spin-label spin-label-6">Bonus Points</span>
+          </div>
+        </div>
+      </div>
+      <button class="spin-btn">Spin</button>
+      <div class="spin-prize">Your prize will appear here!</div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      &copy; 2024 Rate4DiWin. Made with <span style="color: var(--secondary);">&#10084;</span> in Kigali.
+    </div>
+  </footer>
+</body>
+</html> 
